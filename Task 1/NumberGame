@@ -1,0 +1,64 @@
+Task 1 Instructions :
+1. Generate a random number within a specified range, such as 1 to 100.
+2. Prompt the user to enter their guess for the generated number.
+3. Compare the user's guess with the generated number and provide feedback on whether the guess is correct, too high, or too low.
+4. Repeat steps 2 and 3 until the user guesses the correct number.
+You can incorporate additional details as follows:
+5. Limit the number of attempts the user has to guess the number.
+6. Add the option for multiple rounds, allowing the user to play again.
+7. Display the user's score, which can be based on the number of attempts taken or rounds won.
+
+Source Code :
+import java.util.*;
+class RandomNumber
+{
+    public static void guessTheNumber()
+    {
+        Scanner sc = new Scanner(System.in);
+        int randomNumber = (int)(Math.random()*101) + 100;
+        System.out.println("The number is between 100 and 200.");
+        int guesses = 10,i;
+        
+        for(i  = guesses; i > 0; i--)
+        {
+            int guessedNumber = sc.nextInt();
+            if(guessedNumber >= 100 && guessedNumber <= 200)
+            {
+                if(randomNumber == guessedNumber)
+                {
+                    System.out.println("Congratulations! You have guessed the number!");
+                    break;
+                }
+                if (randomNumber > guessedNumber)
+                {
+                    System.out.println("The number is greater than " + guessedNumber);
+                    System.out.println("Guesses left : " + (i - 1));
+                }
+                if (guessedNumber > randomNumber)
+                {
+                    System.out.println("The number is smaller than " + guessedNumber);
+                    System.out.println("Guesses left : " + (i - 1));
+                    
+                }
+            }
+            else
+            {
+                System.err.println("The number is between 100 and 200");
+                System.out.println("Guesses left : " + (i - 1));
+            }
+        }
+
+        if(i == 0)
+            System.out.println("Game Over! The number was " + randomNumber);
+
+    }
+    public static void main(String args[])
+    {
+        System.out.println("``````````````````````````````````````````````");
+        System.out.println("`              Guess the number              `");
+        System.out.println("``````````````````````````````````````````````");
+        System.out.println("Watch your moves! You've 10 guesses!");
+        guessTheNumber();
+    }
+}
+
