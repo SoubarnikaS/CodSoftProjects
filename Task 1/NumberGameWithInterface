@@ -1,0 +1,93 @@
+Task 1 Instructions :
+1. Generate a random number within a specified range, such as 1 to 100.
+2. Prompt the user to enter their guess for the generated number.
+3. Compare the user's guess with the generated number and provide feedback on whether the guess is correct, too high, or too low.
+4. Repeat steps 2 and 3 until the user guesses the correct number.
+You can incorporate additional details as follows:
+5. Limit the number of attempts the user has to guess the number.
+6. Add the option for multiple rounds, allowing the user to play again.
+7. Display the user's score, which can be based on the number of attempts taken or rounds won.
+
+Source Code :
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.*;
+public class GuessNumber_GUI
+{
+    static int totalGuess = 10;
+    static int randomNumber = (int) (Math.random() * 101) + 100;
+    private static JLabel guessLabel;
+    private static JTextField input;
+    private static JButton button;
+    private static JTextArea output;
+
+    public static void handleGuess()
+    {
+        if(totalGuess > 1)
+        {
+            try
+            {
+                int guessedNumber = Integer.parseInt(input.getText());
+
+                if(guessedNumber >= 100 && guessedNumber <= 200)
+                {
+                    if(guessedNumber == randomNumber)
+                    {
+                        output.append("Congratulaions! You have guessed the number!\n");
+                        input.setEditable(false);
+                    }
+
+                    else if( guessedNumber < randomNumber)
+                    {
+                        output.append("The number is greater than " + guessedNumber + "\n");
+                        output.append("Guesses left : " + (--totalGuess) + "\n");
+                    }
+                    else if( guessedNumber > randomNumber)
+                    {
+                        output.append("The number is smaller than " + guessedNumber + "\n");
+                        output.append("Guesses left : " + (--totalGuess) + "\n");
+                    }
+                }
+                else
+                    output.append("The number is between 100 and 200\n");
+            }   
+            catch(NumberFormatException e)
+            {
+                output.append("Enter a valid number\n");
+            }
+            input.setText(""); 
+        }
+        else if( totalGuess == 1)
+            output.append("Game over! The number was :" + randomNumber);
+    }
+    
+    public static void main(String args[])
+    {
+        JFrame frame = new JFrame("Guess The Number!");
+        frame.setVisible(true);
+        frame.setSize(600,400);
+        frame.setLayout(new FlowLayout());
+
+        guessLabel = new JLabel("Enter the number between 100 and 200");
+        input = new JTextField(4);
+        button = new JButton("Guess!");
+        output = new JTextArea(20,50);
+
+        frame.add(guessLabel);
+        frame.add(input);
+        frame.add(button);
+        frame.add(output);
+        output.setEditable(false);
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleGuess();
+            }
+        });
+
+      frame.setVisible(true);
+    }
+}
