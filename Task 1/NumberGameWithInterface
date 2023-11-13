@@ -9,10 +9,10 @@ You can incorporate additional details as follows:
 7. Display the user's score, which can be based on the number of attempts taken or rounds won.
 
 Source Code :
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.*;
 public class GuessNumber_GUI
 {
@@ -35,7 +35,7 @@ public class GuessNumber_GUI
                 {
                     if(guessedNumber == randomNumber)
                     {
-                        output.append("Congratulaions! You have guessed the number!\n");
+                        JOptionPane.showInternalMessageDialog(null,"Congratulaions! You have guessed the number!");
                         input.setEditable(false);
                     }
 
@@ -60,7 +60,7 @@ public class GuessNumber_GUI
             input.setText(""); 
         }
         else if( totalGuess == 1)
-            output.append("Game over! The number was :" + randomNumber);
+            JOptionPane.showMessageDialog(null,"Game Over!\nThe number was " + randomNumber);
     }
     
     public static void main(String args[])
